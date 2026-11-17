@@ -266,6 +266,12 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   #knockout .center-awards{padding-top:36px;gap:10px 8px}
   #knockout .center-awards .award .competitor{padding:5px 4px}
 }
+
+/* Remove knockout page title to reclaim vertical space for the bracket */
+@media(min-width:1000px){
+  #knockout .panel-title{display:none!important}
+  #knockout .bracket-board{height:100%;margin-top:0}
+}
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
