@@ -236,34 +236,35 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
  .center-awards .award-note{padding:3px 2px 5px}
 }
 
-/* Fit every knockout round fully inside the TV viewport */
-@media (min-width:1000px){
-  main{padding:5px 1.2vw 5px}
+/* TV knockout layout correction: preserve readable match cards and complete all 8 R16 matches */
+@media(min-width:1000px){
+  main{padding:8px 1.6vw 8px}
   #knockout.panel.active{display:flex;flex-direction:column;min-height:0}
-  #knockout .panel-title{flex:0 0 auto;margin:0 0 5px;font-size:clamp(15px,1.25vw,21px);line-height:1.15}
-  #knockout .bracket-board{flex:1 1 0;min-height:0;height:0;overflow:hidden;align-items:stretch}
-  #knockout .bracket-side{min-height:0;overflow:hidden}
-  #knockout .bracket-side h2{margin:0 0 4px;padding:5px;font-size:clamp(12px,.9vw,16px);line-height:1.1}
-  #knockout .rounds{min-height:0;height:100%;gap:4px}
-  #knockout .round{min-height:0;justify-content:space-between;gap:2px;overflow:hidden}
-  #knockout .round-label{flex:0 0 auto;padding:4px 2px;font-size:clamp(7px,.48vw,9px);line-height:1.1}
-  #knockout .match{flex:0 1 auto;min-height:0;border-radius:6px}
-  #knockout .match-meta{padding:2px 3px 0;font-size:clamp(6px,.37vw,8px);line-height:1.05}
-  #knockout .competitor{grid-template-columns:13px minmax(0,1fr) 24px;gap:2px;padding:2px 3px;min-height:0;font-size:clamp(7px,.43vw,9px);line-height:1.05}
-  #knockout .competitor .points{padding:1px 0;border-radius:4px}
-  #knockout .center-awards{padding:28px 0 4px;gap:8px 7px;overflow:hidden}
-  #knockout .center-awards .award-head{padding:6px 2px;font-size:clamp(8px,.55vw,11px)}
-  #knockout .center-awards .award .competitor{padding:4px 3px;font-size:clamp(7px,.42vw,9px)}
-  #knockout .center-awards .award-note{padding:3px 2px 4px;font-size:clamp(6px,.35vw,8px)}
+  #knockout .panel-title{flex:0 0 auto;margin:0 0 8px;font-size:clamp(17px,1.45vw,24px);line-height:1.15}
+  #knockout .bracket-board{flex:1 1 0;min-height:0;height:auto;overflow:visible;align-items:stretch}
+  #knockout .bracket-side{min-height:0;overflow:visible}
+  #knockout .bracket-side h2{margin:0 0 6px;padding:7px;font-size:clamp(13px,1vw,17px);line-height:1.1}
+  #knockout .rounds{min-height:0;height:100%;gap:6px;align-items:stretch}
+  #knockout .round{min-height:0;justify-content:space-around;gap:clamp(5px,.7vh,9px);overflow:visible}
+  #knockout .round-label{flex:0 0 auto;padding:5px 2px;font-size:clamp(8px,.55vw,10px);line-height:1.1}
+  #knockout .match{flex:0 0 auto;min-height:0;border-radius:7px}
+  #knockout .match-meta{padding:3px 4px 1px;font-size:clamp(7px,.43vw,9px);line-height:1.05}
+  #knockout .competitor{grid-template-columns:16px minmax(0,1fr) 25px;gap:2px;padding:3px 4px;min-height:0;font-size:clamp(8px,.52vw,10px);line-height:1.1}
+  #knockout .competitor .points{padding:2px 0;border-radius:4px}
+  #knockout .center-awards{padding:44px 0 8px;gap:14px 10px;overflow:visible}
+  #knockout .center-awards .award-head{padding:8px 4px;font-size:clamp(9px,.62vw,12px)}
+  #knockout .center-awards .award .competitor{padding:7px 5px;font-size:clamp(8px,.48vw,10px)}
+  #knockout .center-awards .award-note{padding:5px 3px 7px;font-size:clamp(7px,.4vw,9px)}
 }
-@media (min-width:1000px) and (max-height:850px){
-  main{padding-top:3px;padding-bottom:3px}
-  #knockout .panel-title{margin-bottom:3px;font-size:15px}
-  #knockout .bracket-side h2{padding:4px}
-  #knockout .match-meta{padding:1px 3px 0}
-  #knockout .competitor{padding:1px 3px}
-  #knockout .center-awards{padding-top:22px;gap:6px}
-  #knockout .center-awards .award .competitor{padding:3px}
+@media(min-width:1000px) and (max-height:850px){
+  main{padding-top:6px;padding-bottom:6px}
+  #knockout .panel-title{margin-bottom:5px;font-size:clamp(16px,1.25vw,20px)}
+  #knockout .bracket-side h2{padding:6px}
+  #knockout .round{gap:5px}
+  #knockout .match-meta{padding:2px 4px 1px}
+  #knockout .competitor{padding:2px 4px}
+  #knockout .center-awards{padding-top:36px;gap:10px 8px}
+  #knockout .center-awards .award .competitor{padding:5px 4px}
 }
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
