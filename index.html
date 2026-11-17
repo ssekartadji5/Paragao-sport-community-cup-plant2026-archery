@@ -516,9 +516,9 @@ const male=["Andi Pratama","Budi Santoso","Candra Wijaya","Dimas Saputra","Eko F
 const female=["Anisa Rahmawati","Bella Oktavia","Citra Lestari","Dewi Anggraini","Eka Wulandari","Fitri Handayani","Gita Permata","Hana Safitri","Intan Maharani","Jihan Putri","Kartika Sari","Laila Nurfadila","Maya Puspita","Nadia Aulia","Olivia Putri","Putri Amelia","Qonita Zahra","Rani Aprilia","Salsa Nabila"];
 const makePlayers=(names,offset)=>names.map((name,i)=>({bib:i+1,name,total:Math.max(28,58-i+((i*7+offset)%5)-2),done:true})).sort((a,b)=>b.total-a.total||a.bib-b.bib);
 const men=makePlayers(male,2),women=makePlayers(female,4);
-function tableRows(players){return players.map((p,i)=>{const q=i<16;return '<div class="r '+(q?'qual':'')+'"><span class="rank">'+(i+1)+'</span><span class="bib">'+p.bib+'</span><span class="name">'+p.name+'</span><span class="score">'+p.total+'</span><span class="tag">'+(q?'TOP 16':'')+'</span></div>'}).join('')}
-function tableBlock(players){return '<div class="table"><div class="thead"><span>Rank</span><span>No.</span><span>Nama peserta</span><span>Total</span><span>Status</span></div>'+tableRows(players)+'</div>'}
-document.getElementById('menTables').innerHTML=tableBlock(men.slice(0,17))+tableBlock(men.slice(17));
+function tableRows(players,startRank=0){return players.map((p,i)=>{const rank=startRank+i+1;const q=rank<=16;return '<div class="r '+(q?'qual':'')+'"><span class="rank">'+rank+'</span><span class="bib">'+p.bib+'</span><span class="name">'+p.name+'</span><span class="score">'+p.total+'</span><span class="tag">'+(q?'TOP 16':'')+'</span></div>'}).join('')}
+function tableBlock(players,startRank=0){return '<div class="table"><div class="thead"><span>Rank</span><span>No.</span><span>Nama peserta</span><span>Total</span><span>Status</span></div>'+tableRows(players,startRank)+'</div>'}
+document.getElementById('menTables').innerHTML=tableBlock(men.slice(0,17),0)+tableBlock(men.slice(17),17);
 document.getElementById('womenTable').innerHTML=tableBlock(women);
 function comp(num,name,score,win=false){return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+num+'</span><span class="person">'+name+'</span><span class="points">'+score+'</span></div>'}
 function match(id,a,b,sa,sb,done=false){return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+(done?'SELESAI':'BELUM MULAI')+'</span></div>'+comp(a[0],a[1],sa,sa>sb)+comp(b[0],b[1],sb,sb>sa)+'</div>'}
