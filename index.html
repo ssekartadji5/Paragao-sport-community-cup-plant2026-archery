@@ -466,6 +466,45 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   .logo{position:relative;z-index:3;overflow:visible}
   .logo img{transform:scale(2);transform-origin:center}
 }
+
+
+/* Responsive phone and tablet layout */
+@media(max-width:900px){
+  .top{padding:18px 16px;background:linear-gradient(110deg,#210209,var(--burg) 66%,#210209)}
+  .head{max-width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+  .logo,.rule,.archer{display:none}
+  .title{flex:0 0 100%;min-width:0;text-align:center}
+  .title h1{font-size:clamp(25px,4.8vw,38px);line-height:1.12;letter-spacing:0}
+  .title p{display:inline-block;margin:7px 0 0;padding:5px 14px;font-size:11px}
+  .head nav{position:static;transform:none;width:100%;min-width:0;display:flex;gap:8px;padding:4px 0 0;margin:0;background:transparent}
+  .head nav .navbtn{flex:1;min-width:0;padding:12px 8px;font-size:clamp(9px,1.6vw,12px);white-space:normal}
+  main{height:auto;max-width:100%;padding:12px 12px 28px;overflow:visible}
+  .panel{height:auto;overflow:visible}
+  .panel.active{display:block}
+  .category-grid{grid-template-columns:1fr}
+  .bracket-board{grid-template-columns:1fr;gap:22px}
+  .bracket-side{width:100%}
+  .center-awards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;gap:12px;padding:0;transform:none}
+}
+@media(max-width:560px){
+  .top{padding:16px 12px}
+  .title h1{font-size:clamp(23px,6vw,30px)}
+  .title p{font-size:10px}
+  main{padding:10px 8px 24px}
+  .navbtn{letter-spacing:0}
+  .tables{grid-template-columns:1fr}
+  .rounds{grid-template-columns:1fr;gap:12px}
+  .round{gap:8px}
+  .round-label{font-size:11px;padding:8px}
+  .match-meta{font-size:9px;padding:4px 6px 2px}
+  .competitor{grid-template-columns:24px minmax(0,1fr) 38px;font-size:11px;padding:6px}
+  .competitor .points{font-size:11px;padding:3px}
+  .center-awards{grid-template-columns:1fr;gap:12px}
+  .center-awards .award{width:100%}
+  .center-awards .award-head{font-size:12px;padding:9px}
+  .center-awards .award .competitor{font-size:11px;padding:7px}
+  .center-awards .award-note{font-size:10px;padding:5px}
+}
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
