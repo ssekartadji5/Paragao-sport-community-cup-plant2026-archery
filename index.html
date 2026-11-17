@@ -186,6 +186,55 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
  .center-awards .award .competitor{padding:5px 4px}
  .center-awards .award-note{padding:3px 2px 5px}
 }
+
+/* Center finals follow the supplied reference: winners above, bronze below */
+@media(min-width:1000px){
+ .bracket-board{grid-template-columns:minmax(0,1fr) minmax(430px,27vw) minmax(0,1fr);gap:10px}
+ .center-awards{
+   padding:38px 0 8px;
+   display:grid;
+   grid-template-columns:repeat(2,minmax(0,1fr));
+   grid-template-rows:repeat(2,minmax(0,1fr));
+   align-content:center;
+   align-items:center;
+   justify-items:stretch;
+   gap:12px 10px;
+ }
+ .center-awards .award{
+   width:100%;height:auto;min-width:0;align-self:center;
+   background:#17191f;border:2px solid #f21b16;border-radius:12px;
+   box-shadow:0 3px 8px #17243a30;overflow:hidden;
+ }
+ .center-awards .award.third{border-color:#e4a900}
+ .center-awards .award-head{
+   background:linear-gradient(90deg,#fa1b16,#c90008);
+   padding:8px 3px;font-size:clamp(10px,.68vw,13px);
+   text-align:center;white-space:nowrap;
+ }
+ .center-awards .award.third .award-head{
+   background:linear-gradient(90deg,#ffc400,#e4a000);color:#1c1600
+ }
+ .center-awards .award .competitor{
+   display:grid;grid-template-columns:14px minmax(0,1fr) 32px;
+   padding:6px 5px;gap:3px;font-size:clamp(8px,.52vw,10px);
+   background:#17191f;color:#fff;
+ }
+ .center-awards .award .competitor .num{color:#cbd3df}
+ .center-awards .award .competitor .points{
+   color:#101828;background:#fff;border-color:#d7dce5;border-radius:6px;
+ }
+ .center-awards .award-note{
+   background:#17191f;color:#f0f2f5;padding:5px 3px 7px;
+   font-size:clamp(7px,.44vw,9px);font-weight:900;text-align:center;
+ }
+}
+@media(min-width:1000px) and (max-height:780px){
+ .bracket-board{grid-template-columns:minmax(0,1fr) minmax(400px,26vw) minmax(0,1fr)}
+ .center-awards{padding:30px 0 5px;gap:9px 8px}
+ .center-awards .award-head{padding:6px 3px}
+ .center-awards .award .competitor{padding:4px 4px}
+ .center-awards .award-note{padding:3px 2px 5px}
+}
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
@@ -204,9 +253,9 @@ document.getElementById('womenTable').innerHTML=tableBlock(women);
 function comp(num,name,score,win=false){return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+num+'</span><span class="person">'+name+'</span><span class="points">'+score+'</span></div>'}
 function match(id,a,b,sa,sb,done=false){return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+(done?'SELESAI':'BELUM MULAI')+'</span></div>'+comp(a[0],a[1],sa,sa>sb)+comp(b[0],b[1],sb,sb>sa)+'</div>'}
 function bracket(players,prefix){const seeds=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];const r1=seeds.slice(0,8).map((s,i)=>match(prefix+'-R16-'+(i+1),[players[s].bib,players[s].name],[players[seeds[15-i]].bib,players[seeds[15-i]].name],55-i,51+i%3,false));const qf=[match(prefix+'-QF1',[players[0].bib,players[0].name],[players[7].bib,players[7].name],56,52,false),match(prefix+'-QF2',[players[4].bib,players[4].name],[players[3].bib,players[3].name],54,53,false),match(prefix+'-QF3',[players[5].bib,players[5].name],[players[2].bib,players[2].name],53,50,false),match(prefix+'-QF4',[players[6].bib,players[6].name],[players[1].bib,players[1].name],52,55,false)];const sf=[match(prefix+'-SF1',[players[0].bib,players[0].name],[players[4].bib,players[4].name],57,54,false),match(prefix+'-SF2',[players[5].bib,players[1].name],[players[6].bib,players[6].name],52,56,false)];return '<div class="round"><div class="round-label">16 BESAR</div>'+r1.join('')+'</div><div class="round"><div class="round-label">8 BESAR</div>'+qf.join('')+'</div><div class="round"><div class="round-label">4 BESAR</div>'+sf.join('')+'</div>'}
-function awards(prefix){return '<div class="award"><div class="award-head">FINAL · '+prefix+'</div>'+comp('—','Pemenang SF1','—')+comp('—','Pemenang SF2','—')+'<div class="award-note">JUARA 1 &amp; 2</div></div><div class="award third"><div class="award-head">JUARA 3 · '+prefix+'</div>'+comp('—','Kalah SF1','—')+comp('—','Kalah SF2','—')+'<div class="award-note">PEREBUTAN JUARA 3</div></div>'}
+function awardFinal(prefix){return '<div class="award"><div class="award-head">FINAL '+prefix+'</div>'+comp('—','Pemenang SF1','—')+comp('—','Pemenang SF2','—')+'<div class="award-note">JUARA 1 &amp; 2</div></div>'}\nfunction awardThird(prefix){return '<div class="award third"><div class="award-head">JUARA 3 '+prefix+'</div>'+comp('—','Kalah SF1','—')+comp('—','Kalah SF2','—')+'<div class="award-note">PEREBUTAN JUARA 3</div></div>'}
 document.getElementById('menBracket').innerHTML=bracket(men,'M');
 document.getElementById('womenBracket').innerHTML=bracket(women,'W');
-document.getElementById('centerAwards').innerHTML=awards('PUTRA')+awards('PUTRI');
+document.getElementById('centerAwards').innerHTML=awardFinal('PUTRA')+awardFinal('PUTRI')+awardThird('PUTRA')+awardThird('PUTRI');
 document.querySelectorAll('.navbtn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));}));
 </script></body></html>
