@@ -406,11 +406,12 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   #knockout .rounds>.round{grid-template-rows:23px repeat(8,minmax(0,1fr))}
 }
 
-/* Keep all 8 Round-of-16 matches fitted within the available full-screen height */
+/* Keep all 8 Round-of-16 matches fully visible above the bottom screen edge */
 @media(min-width:1000px){
   #knockout .rounds>.round:nth-child(1){
     grid-template-rows:23px repeat(8,minmax(0,1fr));
     row-gap:3.5px;
+    padding-bottom:18px;
     align-content:stretch;
   }
 }
