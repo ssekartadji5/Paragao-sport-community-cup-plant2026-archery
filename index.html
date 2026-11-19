@@ -1059,8 +1059,8 @@ function matchCard(item, category, index, seededPair=null) {
   const done = item.status === "COMPLETED";
   const athleteA = item.athleteA || (seededPair && seededPair[0] ? seededPair[0].name : "");
   const athleteB = item.athleteB || (seededPair && seededPair[1] ? seededPair[1].name : "");
-  const bibA = seededPair && !item.athleteA ? seededPair[0].bib : "A";
-  const bibB = seededPair && !item.athleteB ? seededPair[1].bib : "B";
+  const bibA = seededPair && !item.athleteA && seededPair[0] ? seededPair[0].bib : "A";
+  const bibB = seededPair && !item.athleteB && seededPair[1] ? seededPair[1].bib : "B";
   return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+escapeHtml(item.status || "NOT STARTED")+'</span></div>' +
     comp(bibA,athleteA,item.scoreA,!!item.winner && item.winner===athleteA) +
     comp(bibB,athleteB,item.scoreB,!!item.winner && item.winner===athleteB) +
