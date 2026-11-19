@@ -731,11 +731,48 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   }
 }
 
+
+/* Knockout palette matches Qualification: Men red, Women blue */
+#knockout .bracket-side.men h2{
+  background:linear-gradient(100deg,#b90f12,#fe1b0a);
+}
+#knockout .bracket-side.women h2{
+  background:linear-gradient(100deg,#104d8d,#1976d2);
+}
+#knockout .bracket-side.men .round-label{
+  background:linear-gradient(100deg,#b90f12,#fe1b0a);
+}
+#knockout .bracket-side.women .round-label{
+  background:linear-gradient(100deg,#104d8d,#1976d2);
+}
+#knockout .bracket-side.men .competitor.winner{
+  background:rgba(254,27,10,.13);
+}
+#knockout .bracket-side.men .competitor.winner .points{
+  background:#fe1b0a;
+  border-color:#fe1b0a;
+  color:#fff;
+}
+#knockout .bracket-side.women .competitor.winner{
+  background:rgba(25,118,210,.14);
+}
+#knockout .bracket-side.women .competitor.winner .points{
+  background:#1976d2;
+  border-color:#1976d2;
+  color:#fff;
+}
+#knockout .bracket-side.men .match{
+  border-color:rgba(254,27,10,.35);
+}
+#knockout .bracket-side.women .match{
+  border-color:rgba(25,118,210,.35);
+}
+
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
 <section id="qualification" class="panel active"><div class="panel-title">ARCHERY QUALIFICATION RANKING</div><div class="category-grid"><div class="category"><div class="cat-title">MEN'S CATEGORY · 33 ATHLETES</div><div class="tables" id="menTables"></div></div><div class="category"><div class="cat-title women-title">WOMEN'S CATEGORY · 19 ATHLETES</div><div class="tables one" id="womenTable"></div></div></div><div class="legend"><span><i class="swatch"></i> TOP 16</span><span><i class="swatch normal"></i> OUTSIDE TOP 16</span></div></section>
-<section id="knockout" class="panel"><div class="panel-title">ARCHERY · KNOCKOUT &amp; FINAL</div><div class="bracket-board"><div class="bracket-side men"><h2>KATEGORI MEN</h2><div class="rounds" id="menBracket"></div></div><div class="center-awards" id="centerAwards"></div><div class="bracket-side women"><h2>KATEGORI WOMEN</h2><div class="rounds" id="womenBracket"></div></div></div></section>
+<section id="knockout" class="panel"><div class="panel-title">ARCHERY · KNOCKOUT &amp; FINAL</div><div class="bracket-board"><div class="bracket-side men"><h2>MEN'S CATEGORY</h2><div class="rounds" id="menBracket"></div></div><div class="center-awards" id="centerAwards"></div><div class="bracket-side women"><h2>WOMEN'S CATEGORY</h2><div class="rounds" id="womenBracket"></div></div></div></section>
 <div class="demo">PROTOTYPE VIEW · SAMPLE DATA, NOT CONNECTED TO GOOGLE SHEETS</div></main><footer class="footer">PARAGON SPORT COMMUNITY CUP PLANT · 2026</footer>
 <script>
 const male=["Andi Pratama","Budi Santoso","Candra Wijaya","Dimas Saputra","Eko Firmansyah","Fajar Nugroho","Gilang Ramadhan","Hendra Kurniawan","Irfan Maulana","Joko Susilo","Kevin Prasetyo","Lukman Hakim","Muhammad Rizky","Nanda Putra","Oscar Wijaya","Putra Aditya","Raka Saputra","Satria Wibowo","Teguh Hidayat","Umar Farhan","Vino Akbar","Wahyu Setiawan","Yoga Pratama","Zaki Fadillah","Agus Setiawan","Bayu Kurnia","Dani Firmansyah","Evan Mahendra","Farhan Akmal","Gerry Saputra","Hadi Purnama","Ilham Maulana","Jefri Kurnia"];
