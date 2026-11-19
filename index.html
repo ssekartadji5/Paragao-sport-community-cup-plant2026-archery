@@ -631,10 +631,19 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   #qualification .r{margin:1px 2px;padding:4px 6px}
 }
 
+
+/* Women category identity: blue header, with BIB column label */
+#qualification .category:has(#womenTable) .cat-title{
+  background:linear-gradient(100deg,#125aa5,#1976d2);
+}
+#qualification .category:has(#womenTable) .thead{
+  background:linear-gradient(100deg,#104d8d,#1976d2);
+}
+
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
-<section id="qualification" class="panel active"><div class="panel-title">ARCHERY QUALIFICATION RANKING</div><div class="category-grid"><div class="category"><div class="cat-title">KATEGORI PUTRA · 33 PESERTA</div><div class="tables" id="menTables"></div></div><div class="category"><div class="cat-title">KATEGORI PUTRI · 19 PESERTA</div><div class="tables one" id="womenTable"></div></div></div><div class="legend"><span><i class="swatch"></i> TOP 16</span><span><i class="swatch normal"></i> Belum masuk TOP 16</span></div></section>
+<section id="qualification" class="panel active"><div class="panel-title">ARCHERY QUALIFICATION RANKING</div><div class="category-grid"><div class="category"><div class="cat-title">KATEGORI PUTRA · 33 PESERTA</div><div class="tables" id="menTables"></div></div><div class="category"><div class="cat-title women-title">KATEGORI PUTRI · 19 PESERTA</div><div class="tables one" id="womenTable"></div></div></div><div class="legend"><span><i class="swatch"></i> TOP 16</span><span><i class="swatch normal"></i> Belum masuk TOP 16</span></div></section>
 <section id="knockout" class="panel"><div class="panel-title">ARCHERY · KNOCKOUT &amp; FINAL</div><div class="bracket-board"><div class="bracket-side men"><h2>KATEGORI PUTRA</h2><div class="rounds" id="menBracket"></div></div><div class="center-awards" id="centerAwards"></div><div class="bracket-side women"><h2>KATEGORI PUTRI</h2><div class="rounds" id="womenBracket"></div></div></div></section>
 <div class="demo">TAMPILAN PROTOTYPE · DATA CONTOH, BELUM TERHUBUNG KE GOOGLE SHEETS</div></main><footer class="footer">PARAGON SPORT COMMUNITY CUP PLANT · 2026</footer>
 <script>
@@ -643,7 +652,7 @@ const female=["Anisa Rahmawati","Bella Oktavia","Citra Lestari","Dewi Anggraini"
 const makePlayers=(names,offset)=>names.map((name,i)=>({bib:i+1,name,total:Math.max(28,58-i+((i*7+offset)%5)-2),done:true})).sort((a,b)=>b.total-a.total||a.bib-b.bib);
 const men=makePlayers(male,2),women=makePlayers(female,4);
 function tableRows(players,startRank=0){return players.map((p,i)=>{const rank=startRank+i+1;const q=rank<=16;return '<div class="r '+(q?'qual':'')+'"><span class="rank">'+rank+'</span><span class="bib">'+p.bib+'</span><span class="name">'+p.name+'</span><span class="score">'+p.total+'</span><span class="tag">'+(q?'TOP 16':'')+'</span></div>'}).join('')}
-function tableBlock(players,startRank=0){return '<div class="table"><div class="thead"><span>Rank</span><span>No.</span><span>Nama peserta</span><span>Total</span><span>Status</span></div>'+tableRows(players,startRank)+'</div>'}
+function tableBlock(players,startRank=0){return '<div class="table"><div class="thead"><span>Rank</span><span>BIB</span><span>Nama peserta</span><span>Total</span><span>Status</span></div>'+tableRows(players,startRank)+'</div>'}
 document.getElementById('menTables').innerHTML=tableBlock(men.slice(0,17),0)+tableBlock(men.slice(17),17);
 document.getElementById('womenTable').innerHTML=tableBlock(women);
 function comp(num,name,score,win=false){return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+num+'</span><span class="person">'+name+'</span><span class="points">'+score+'</span></div>'}
