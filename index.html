@@ -780,6 +780,69 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   background:linear-gradient(100deg,#b90f12 0%,#fe1b0a 100%) !important;
 }
 
+
+/* Finals, champions and third-place cards: gold finals, category-colored bronze matches */
+@media(min-width:1000px){
+ #knockout .center-awards{
+   grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+   grid-template-rows:repeat(3,minmax(0,1fr)) !important;
+   gap:8px 9px !important;
+   padding:26px 0 5px !important;
+   align-content:stretch;
+ }
+ #knockout .center-awards .final-award{
+   border:2px solid #d5a32a !important;
+   background:#17191f;
+ }
+ #knockout .center-awards .final-award .award-head{
+   background:linear-gradient(100deg,#f8d879 0%,#c99522 100%) !important;
+   color:#4b3106 !important;
+ }
+ #knockout .center-awards .champion-award{
+   align-self:center;
+   width:100%;
+   min-width:0;
+   padding:8px 9px;
+   border:2px solid #d5a32a;
+   border-radius:10px;
+   background:linear-gradient(135deg,rgba(255,246,218,.98),rgba(245,220,157,.96));
+   color:#68470d;
+   box-shadow:0 3px 9px rgba(30,30,30,.16);
+ }
+ #knockout .center-awards .champion-title{
+   font-size:clamp(8px,.55vw,10px);
+   font-weight:1000;
+   margin-bottom:6px;
+   white-space:nowrap;
+ }
+ #knockout .center-awards .champion-name{
+   background:#fff;
+   border:1.5px solid #d5a32a;
+   border-radius:6px;
+   padding:7px 6px;
+   font-size:clamp(8px,.6vw,11px);
+   font-weight:1000;
+   color:#68470d;
+   overflow:hidden;
+   text-overflow:ellipsis;
+   white-space:nowrap;
+ }
+ #knockout .center-awards .award.third.men{border-color:#fe1b0a !important}
+ #knockout .center-awards .award.third.men .award-head{
+   background:linear-gradient(100deg,#b90f12,#fe1b0a) !important;color:#fff !important;
+ }
+ #knockout .center-awards .award.third.women{border-color:#1976d2 !important}
+ #knockout .center-awards .award.third.women .award-head{
+   background:linear-gradient(100deg,#104d8d,#1976d2) !important;color:#fff !important;
+ }
+}
+@media(min-width:1000px) and (max-height:780px){
+ #knockout .center-awards{padding-top:20px !important;gap:6px 8px !important}
+ #knockout .center-awards .champion-award{padding:5px 7px}
+ #knockout .center-awards .champion-title{margin-bottom:3px}
+ #knockout .center-awards .champion-name{padding:5px}
+}
+
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
@@ -798,8 +861,9 @@ document.getElementById('womenTable').innerHTML=tableBlock(women);
 function comp(num,name,score,win=false){return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+num+'</span><span class="person">'+name+'</span><span class="points">'+score+'</span></div>'}
 function match(id,a,b,sa,sb,done=false){return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+(done?'COMPLETED':'NOT STARTED')+'</span></div>'+comp(a[0],a[1],sa,sa>sb)+comp(b[0],b[1],sb,sb>sa)+'</div>'}
 function bracket(players,prefix){const seeds=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];const r1=seeds.slice(0,8).map((s,i)=>match(prefix+'-R16-'+(i+1),[players[s].bib,players[s].name],[players[seeds[15-i]].bib,players[seeds[15-i]].name],55-i,51+i%3,false));const qf=[match(prefix+'-QF1',[players[0].bib,players[0].name],[players[7].bib,players[7].name],56,52,false),match(prefix+'-QF2',[players[4].bib,players[4].name],[players[3].bib,players[3].name],54,53,false),match(prefix+'-QF3',[players[5].bib,players[5].name],[players[2].bib,players[2].name],53,50,false),match(prefix+'-QF4',[players[6].bib,players[6].name],[players[1].bib,players[1].name],52,55,false)];const sf=[match(prefix+'-SF1',[players[0].bib,players[0].name],[players[4].bib,players[4].name],57,54,false),match(prefix+'-SF2',[players[5].bib,players[1].name],[players[6].bib,players[6].name],52,56,false)];return '<div class="round"><div class="round-label">ROUND OF 16</div>'+r1.join('')+'</div><div class="round"><div class="round-label">QUARTERFINALS</div>'+qf.join('')+'</div><div class="round"><div class="round-label">SEMIFINALS</div>'+sf.join('')+'</div>'}
-function awardFinal(prefix){return '<div class="award"><div class="award-head">FINAL '+prefix+'</div>'+comp('—','SF1 WINNER','—')+comp('—','SF2 WINNER','—')+'<div class="award-note">1ST &amp; 2ND PLACE</div></div>'}
-function awardThird(prefix){return '<div class="award third"><div class="award-head">THIRD PLACE '+prefix+'</div>'+comp('—','SF1 LOSER','—')+comp('—','SF2 LOSER','—')+'<div class="award-note">THIRD-PLACE MATCH</div></div>'}
+function awardFinal(prefix){return '<div class="award final-award '+prefix.toLowerCase()+'"><div class="award-head">FINAL '+prefix+'</div>'+comp('—','SF1 WINNER','—')+comp('—','SF2 WINNER','—')+'<div class="award-note">1ST &amp; 2ND PLACE</div></div>'}
+function awardChampion(prefix){return '<div class="champion-award '+prefix.toLowerCase()+'"><div class="champion-title">🏆 '+prefix+' CHAMPION</div><div class="champion-name">FINAL WINNER</div></div>'}
+function awardThird(prefix){return '<div class="award third '+prefix.toLowerCase()+'"><div class="award-head">THIRD PLACE '+prefix+'</div>'+comp('—','SF1 LOSER','—')+comp('—','SF2 LOSER','—')+'<div class="award-note">THIRD-PLACE MATCH</div></div>'}
 document.getElementById('menBracket').innerHTML=bracket(men,'M');
 document.getElementById('womenBracket').innerHTML=bracket(women,'W');
 document.getElementById('centerAwards').innerHTML=awardFinal('MEN')+awardFinal('WOMEN')+awardThird('MEN')+awardThird('WOMEN');
