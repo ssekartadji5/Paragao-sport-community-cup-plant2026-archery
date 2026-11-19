@@ -1146,7 +1146,7 @@ document.querySelectorAll(".navbtn").forEach(btn => btn.addEventListener("click"
 
 let archeryRefreshInProgress = false;
 
-async function refreshArcheryData() {
+async async function refreshArcheryData() {
   if (archeryRefreshInProgress) return;
   archeryRefreshInProgress = true;
   try {
