@@ -697,6 +697,40 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   }
 }
 
+
+/* Align Rank and BIB columns; add breathing room before Status */
+#qualification .thead,
+#qualification .r{
+  grid-template-columns:44px 44px minmax(0,1fr) 70px 78px !important;
+  column-gap:8px;
+}
+#qualification .thead span:nth-child(1),
+#qualification .thead span:nth-child(2),
+#qualification .r .rank,
+#qualification .r .bib{
+  text-align:center;
+  justify-self:stretch;
+}
+#qualification .thead span:nth-child(4),
+#qualification .r .score{
+  text-align:center;
+  justify-self:stretch;
+}
+#qualification .thead span:nth-child(5),
+#qualification .r .tag{
+  text-align:center;
+  justify-self:stretch;
+}
+#qualification .r .rank{width:100%}
+#qualification .r .bib{width:100%}
+@media(max-width:560px){
+  #qualification .thead,
+  #qualification .r{
+    grid-template-columns:36px 38px minmax(0,1fr) 58px 66px !important;
+    column-gap:5px;
+  }
+}
+
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
