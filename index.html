@@ -982,22 +982,141 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
 <section id="knockout" class="panel"><div class="panel-title">ARCHERY · KNOCKOUT &amp; FINAL</div><div class="bracket-board"><div class="bracket-side men"><h2>MEN'S CATEGORY</h2><div class="rounds" id="menBracket"></div></div><div class="center-awards" id="centerAwards"></div><div class="bracket-side women"><h2>WOMEN'S CATEGORY</h2><div class="rounds" id="womenBracket"></div></div></div></section>
 <div class="demo">PROTOTYPE VIEW · SAMPLE DATA, NOT CONNECTED TO GOOGLE SHEETS</div></main><footer class="footer">PARAGON SPORT COMMUNITY CUP PLANT · 2026</footer>
 <script>
-const male=["Andi Pratama","Budi Santoso","Candra Wijaya","Dimas Saputra","Eko Firmansyah","Fajar Nugroho","Gilang Ramadhan","Hendra Kurniawan","Irfan Maulana","Joko Susilo","Kevin Prasetyo","Lukman Hakim","Muhammad Rizky","Nanda Putra","Oscar Wijaya","Putra Aditya","Raka Saputra","Satria Wibowo","Teguh Hidayat","Umar Farhan","Vino Akbar","Wahyu Setiawan","Yoga Pratama","Zaki Fadillah","Agus Setiawan","Bayu Kurnia","Dani Firmansyah","Evan Mahendra","Farhan Akmal","Gerry Saputra","Hadi Purnama","Ilham Maulana","Jefri Kurnia"];
-const female=["Anisa Rahmawati","Bella Oktavia","Citra Lestari","Dewi Anggraini","Eka Wulandari","Fitri Handayani","Gita Permata","Hana Safitri","Intan Maharani","Jihan Putri","Kartika Sari","Laila Nurfadila","Maya Puspita","Nadia Aulia","Olivia Putri","Putri Amelia","Qonita Zahra","Rani Aprilia","Salsa Nabila"];
-const makePlayers=(names,offset)=>names.map((name,i)=>({bib:i+1,name,total:Math.max(28,58-i+((i*7+offset)%5)-2),done:true})).sort((a,b)=>b.total-a.total||a.bib-b.bib);
-const men=makePlayers(male,2),women=makePlayers(female,4);
-function tableRows(players,startRank=0){return players.map((p,i)=>{const rank=startRank+i+1;const q=rank<=16;return '<div class="r '+(q?'qual':'')+'"><span class="rank">'+rank+'</span><span class="bib">'+p.bib+'</span><span class="name">'+p.name+'</span><span class="score">'+p.total+'</span><span class="tag">'+(q?'TOP 16':'')+'</span></div>'}).join('')}
-function tableBlock(players,startRank=0){return '<div class="table"><div class="thead"><span>Rank</span><span>BIB</span><span>Athlete</span><span>Total Points</span><span>Status</span></div>'+tableRows(players,startRank)+'</div>'}
-document.getElementById('menTables').innerHTML=tableBlock(men.slice(0,17),0)+tableBlock(men.slice(17),17);
-document.getElementById('womenTable').innerHTML=tableBlock(women);
-function comp(num,name,score,win=false){return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+num+'</span><span class="person">'+name+'</span><span class="points">'+score+'</span></div>'}
-function match(id,a,b,sa,sb,done=false){return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+(done?'COMPLETED':'NOT STARTED')+'</span></div>'+comp(a[0],a[1],sa,sa>sb)+comp(b[0],b[1],sb,sb>sa)+'</div>'}
-function bracket(players,prefix){const seeds=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];const r1=seeds.slice(0,8).map((s,i)=>match(prefix+'-R16-'+(i+1),[players[s].bib,players[s].name],[players[seeds[15-i]].bib,players[seeds[15-i]].name],55-i,51+i%3,false));const qf=[match(prefix+'-QF1',[players[0].bib,players[0].name],[players[7].bib,players[7].name],56,52,false),match(prefix+'-QF2',[players[4].bib,players[4].name],[players[3].bib,players[3].name],54,53,false),match(prefix+'-QF3',[players[5].bib,players[5].name],[players[2].bib,players[2].name],53,50,false),match(prefix+'-QF4',[players[6].bib,players[6].name],[players[1].bib,players[1].name],52,55,false)];const sf=[match(prefix+'-SF1',[players[0].bib,players[0].name],[players[4].bib,players[4].name],57,54,false),match(prefix+'-SF2',[players[5].bib,players[1].name],[players[6].bib,players[6].name],52,56,false)];return '<div class="round"><div class="round-label">ROUND OF 16</div>'+r1.join('')+'</div><div class="round"><div class="round-label">QUARTERFINALS</div>'+qf.join('')+'</div><div class="round"><div class="round-label">SEMIFINALS</div>'+sf.join('')+'</div>'}
-function awardFinal(prefix){return '<div class="award final-award '+prefix.toLowerCase()+'"><div class="award-head">FINAL '+prefix+'</div>'+comp('—','SF1 WN','—')+comp('—','SF2 WN','—')+'<div class="award-note">1ST &amp; 2ND PLACE</div></div>'}
-function awardChampion(prefix){return '<div class="champion-award '+prefix.toLowerCase()+'"><div class="champion-title">🏆 '+prefix+' CHAMPION</div><div class="champion-name">FINAL WINNER</div></div>'}
-function awardThird(prefix){return '<div class="award third '+prefix.toLowerCase()+'"><div class="award-head">THIRD PLACE '+prefix+'</div>'+comp('—','SF1 LS','—')+comp('—','SF2 LS','—')+'<div class="award-note">THIRD-PLACE MATCH</div></div>'}
-document.getElementById('menBracket').innerHTML=bracket(men,'M');
-document.getElementById('womenBracket').innerHTML=bracket(women,'W');
-document.getElementById('centerAwards').innerHTML=awardFinal('MEN')+awardFinal('WOMEN')+awardChampion('MEN')+awardChampion('WOMEN')+awardThird('MEN')+awardThird('WOMEN');
-document.querySelectorAll('.navbtn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));}));
+const ARCHERY_API = "https://script.google.com/macros/s/AKfycbwnrBNsWUJf2Pab_NvhoTgnzThw3pJfLv0sijZoZC0s2HKJaq-xe-NPkcULzqezRU-lmQ/exec";
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[ch]);
+}
+function displayValue(value) {
+  return value === null || value === undefined || value === "" ? "—" : escapeHtml(value);
+}
+function loadArcheryData() {
+  return new Promise((resolve, reject) => {
+    const callbackName = "archeryApiCallback";
+    const timeout = setTimeout(() => {
+      delete window[callbackName];
+      reject(new Error("API request timed out"));
+    }, 20000);
+    window[callbackName] = data => {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      if (!data || data.success !== true) {
+        reject(new Error(data?.error || "API returned invalid data"));
+        return;
+      }
+      resolve(data);
+    };
+    const script = document.createElement("script");
+    script.src = ARCHERY_API + "?callback=" + callbackName + "&_=" + Date.now();
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      reject(new Error("Unable to load Google Sheets API"));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+function tableRows(players) {
+  return players.map(p => {
+    const rank = p.rank ?? "—";
+    const qualified = p.rank !== null && p.rank <= 16 && p.status === "COMPLETED";
+    return '<div class="r '+(qualified?'qual':'')+'">' +
+      '<span class="rank">'+displayValue(rank)+'</span>' +
+      '<span class="bib">'+displayValue(p.bib)+'</span>' +
+      '<span class="name" title="'+escapeHtml(p.name)+'">'+escapeHtml(p.name)+'</span>' +
+      '<span class="score">'+displayValue(p.totalPoints)+'</span>' +
+      '<span class="tag">'+(qualified?'TOP 16':'')+'</span></div>';
+  }).join("");
+}
+function tableBlock(players) {
+  return '<div class="table"><div class="thead"><span>Rank</span><span>BIB</span><span>Athlete</span><span>Total Points</span><span>Status</span></div>'+tableRows(players)+'</div>';
+}
+function sortQualification(rows) {
+  return [...rows].sort((a,b) => {
+    if (a.rank !== null && b.rank !== null) return a.rank-b.rank;
+    if (a.rank !== null) return -1;
+    if (b.rank !== null) return 1;
+    return (a.bib ?? 0)-(b.bib ?? 0);
+  });
+}
+function comp(num,name,score,win=false) {
+  return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+displayValue(num)+'</span><span class="person" title="'+escapeHtml(name)+'">'+(name ? escapeHtml(name) : 'TBD')+'</span><span class="points">'+displayValue(score)+'</span></div>';
+}
+function matchCard(item, category, index) {
+  const prefix = category === "MEN" ? "M" : "W";
+  const id = prefix + "-" + item.round.replace(/[^A-Z0-9]+/g,"-") + "-" + (index+1);
+  const done = item.status === "COMPLETED";
+  return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+escapeHtml(item.status || "NOT STARTED")+'</span></div>' +
+    comp("A",item.athleteA,item.scoreA,!!item.winner && item.winner===item.athleteA) +
+    comp("B",item.athleteB,item.scoreB,!!item.winner && item.winner===item.athleteB) +
+    '</div>';
+}
+function renderBracket(rows, category) {
+  const roundDefs = [
+    ["ROUND OF 16","ROUND OF 16"],
+    ["QUARTERFINALS","QUARTER-FINAL"],
+    ["SEMIFINALS","SEMI-FINAL"]
+  ];
+  return roundDefs.map(([label,key]) => {
+    const matches = rows.filter(x => x.round === key);
+    return '<div class="round"><div class="round-label">'+label+'</div>' +
+      matches.map((item,i)=>matchCard(item,category,i)).join("") +
+      '</div>';
+  }).join("");
+}
+function findRound(rows, round) {
+  return rows.find(x => x.round === round) || {
+    athleteA:"",scoreA:null,athleteB:"",scoreB:null,winner:"",status:"NOT STARTED"
+  };
+}
+function awardMatch(title, item, note, className="") {
+  const aWin = !!item.winner && item.winner === item.athleteA;
+  const bWin = !!item.winner && item.winner === item.athleteB;
+  return '<div class="award '+className+'"><div class="award-head">'+title+'</div>' +
+    comp("—",item.athleteA,item.scoreA,aWin) +
+    comp("—",item.athleteB,item.scoreB,bWin) +
+    '<div class="award-note">'+note+'</div></div>';
+}
+function awardChampion(category, finalMatch) {
+  const winner = finalMatch.winner || "TBD";
+  return '<div class="champion-award '+category.toLowerCase()+'"><div class="champion-title">🏆 '+category+' CHAMPION</div><div class="champion-name">'+escapeHtml(winner)+'</div></div>';
+}
+function renderAwards(menRows,womenRows) {
+  const mf=findRound(menRows,"FINAL"), wf=findRound(womenRows,"FINAL");
+  const mt=findRound(menRows,"THIRD PLACE"), wt=findRound(womenRows,"THIRD PLACE");
+  return awardMatch("FINAL MEN",mf,"1ST &amp; 2ND PLACE","final-award men") +
+    awardMatch("FINAL WOMEN",wf,"1ST &amp; 2ND PLACE","final-award women") +
+    awardChampion("MEN",mf) +
+    awardChampion("WOMEN",wf) +
+    awardMatch("THIRD PLACE MEN",mt,"THIRD-PLACE MATCH","third men") +
+    awardMatch("THIRD PLACE WOMEN",wt,"THIRD-PLACE MATCH","third women");
+}
+function renderArchery(data) {
+  const men = sortQualification(data.qualification.men);
+  const women = sortQualification(data.qualification.women);
+  document.getElementById("menTables").innerHTML =
+    tableBlock(men.slice(0,17)) + tableBlock(men.slice(17));
+  document.getElementById("womenTable").innerHTML = tableBlock(women);
+
+  const menKnockout = data.knockout.men || [];
+  const womenKnockout = data.knockout.women || [];
+  document.getElementById("menBracket").innerHTML = renderBracket(menKnockout,"MEN");
+  document.getElementById("womenBracket").innerHTML = renderBracket(womenKnockout,"WOMEN");
+  document.getElementById("centerAwards").innerHTML = renderAwards(menKnockout,womenKnockout);
+
+  const demo = document.querySelector(".demo");
+  if (demo) demo.textContent = "LIVE DATA · CONNECTED TO GOOGLE SHEETS";
+  document.querySelectorAll(".navbtn").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll(".navbtn").forEach(b => b.classList.toggle("active", b === btn));
+    document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === btn.dataset.panel));
+  }));
+}
+loadArcheryData().then(renderArchery).catch(error => {
+  console.error("Archery data loading failed:", error);
+  const demo = document.querySelector(".demo");
+  if (demo) demo.textContent = "DATA CONNECTION ERROR · PLEASE CHECK GOOGLE SHEETS API";
+});
 </script></body></html>
