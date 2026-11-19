@@ -553,6 +553,64 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
     margin:6px auto 0;
   }
 }
+
+/* Light Arena ranking columns: keep the existing site header untouched */
+#qualification .table{
+  background:rgba(255,255,255,.94);
+  border:1px solid #cbd1d9;
+  border-radius:11px;
+  box-shadow:0 3px 10px rgba(31,38,50,.10);
+}
+#qualification .thead{
+  background:linear-gradient(100deg,#420511,#5b1722);
+  color:#fff;
+  border-bottom:2px solid #d7dce3;
+}
+#qualification .r{
+  background:rgba(232,237,244,.52);
+  border-bottom:1px solid rgba(191,199,210,.65);
+  transition:background .2s ease;
+}
+#qualification .r:nth-child(even){background:rgba(255,255,255,.86)}
+#qualification .r .rank{
+  border-radius:5px;
+  color:#420511;
+  font-weight:1000;
+}
+#qualification .r .bib{color:#6b7280}
+#qualification .r .name{color:#242a33}
+#qualification .r .score{color:#420511}
+#qualification #menTables .r.qual{
+  background:linear-gradient(90deg,rgba(254,27,10,.13),rgba(255,255,255,.94));
+  outline:1.5px solid #fe1b0a;
+  outline-offset:-1.5px;
+}
+#qualification #menTables .r.qual .rank{
+  background:#fe1b0a;color:#fff;padding:3px 0;
+}
+#qualification #menTables .r.qual .tag{
+  background:#fe1b0a;color:#fff;
+}
+#qualification #womenTable .r.qual{
+  background:linear-gradient(90deg,rgba(25,118,210,.15),rgba(255,255,255,.94));
+  outline:1.5px solid #1976d2;
+  outline-offset:-1.5px;
+}
+#qualification #womenTable .r.qual .rank{
+  background:#1976d2;color:#fff;padding:3px 0;
+}
+#qualification #womenTable .r.qual .tag{
+  background:#1976d2;color:#fff;
+}
+#qualification .r:not(.qual) .rank{
+  background:linear-gradient(135deg,#e5e8ed,#f7f8fa);
+  color:#420511;
+}
+@media(max-width:560px){
+  #qualification .thead{font-size:10px}
+  #qualification .r{padding-top:4px;padding-bottom:4px}
+}
+
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
