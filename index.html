@@ -1053,25 +1053,45 @@ function sortQualification(rows) {
 function comp(num,name,score,win=false) {
   return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+displayValue(num)+'</span><span class="person" title="'+escapeHtml(name)+'">'+(name ? escapeHtml(name) : 'TBD')+'</span><span class="points">'+displayValue(score)+'</span></div>';
 }
-function matchCard(item, category, index) {
+function matchCard(item, category, index, seededPair=null) {
   const prefix = category === "MEN" ? "M" : "W";
   const id = prefix + "-" + item.round.replace(/[^A-Z0-9]+/g,"-") + "-" + (index+1);
   const done = item.status === "COMPLETED";
+  const athleteA = item.athleteA || (seededPair && seededPair[0] ? seededPair[0].name : "");
+  const athleteB = item.athleteB || (seededPair && seededPair[1] ? seededPair[1].name : "");
+  const bibA = seededPair && !item.athleteA ? seededPair[0].bib : "A";
+  const bibB = seededPair && !item.athleteB ? seededPair[1].bib : "B";
   return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+escapeHtml(item.status || "NOT STARTED")+'</span></div>' +
-    comp("A",item.athleteA,item.scoreA,!!item.winner && item.winner===item.athleteA) +
-    comp("B",item.athleteB,item.scoreB,!!item.winner && item.winner===item.athleteB) +
+    comp(bibA,athleteA,item.scoreA,!!item.winner && item.winner===athleteA) +
+    comp(bibB,athleteB,item.scoreB,!!item.winner && item.winner===athleteB) +
     '</div>';
 }
-function renderBracket(rows, category) {
+function renderBracket(rows, category, qualificationRows) {
   const roundDefs = [
     ["ROUND OF 16","ROUND OF 16"],
     ["QUARTERFINALS","QUARTER-FINAL"],
     ["SEMIFINALS","SEMI-FINAL"]
   ];
+  const top16 = sortQualification(qualificationRows || [])
+    .filter(p => p.status === "COMPLETED" && p.rank !== null && p.rank <= 16)
+    .sort((a,b) => a.rank-b.rank);
+  const seedOrder = [[1,16],[8,9],[5,12],[4,13],[3,14],[6,11],[7,10],[2,15]];
+  const seededPairs = seedOrder.map(pair => pair.map(rank =>
+    top16.find(p => p.rank === rank) || null
+  ));
   return roundDefs.map(([label,key]) => {
     const matches = rows.filter(x => x.round === key);
+    const cards = key === "ROUND OF 16"
+      ? seedOrder.map((_,i) => {
+          const item = matches[i] || {
+            round:key, status:"NOT STARTED", athleteA:"", athleteB:"",
+            scoreA:null, scoreB:null, winner:""
+          };
+          return matchCard(item,category,i,seededPairs[i]);
+        })
+      : matches.map((item,i)=>matchCard(item,category,i));
     return '<div class="round"><div class="round-label">'+label+'</div>' +
-      matches.map((item,i)=>matchCard(item,category,i)).join("") +
+      cards.join("") +
       '</div>';
   }).join("");
 }
@@ -1111,8 +1131,8 @@ function renderArchery(data) {
 
   const menKnockout = data.knockout.men || [];
   const womenKnockout = data.knockout.women || [];
-  document.getElementById("menBracket").innerHTML = renderBracket(menKnockout,"MEN");
-  document.getElementById("womenBracket").innerHTML = renderBracket(womenKnockout,"WOMEN");
+  document.getElementById("menBracket").innerHTML = renderBracket(menKnockout,"MEN",data.qualification.men);
+  document.getElementById("womenBracket").innerHTML = renderBracket(womenKnockout,"WOMEN",data.qualification.women);
   document.getElementById("centerAwards").innerHTML = renderAwards(menKnockout,womenKnockout);
 
   const demo = document.querySelector(".demo");
