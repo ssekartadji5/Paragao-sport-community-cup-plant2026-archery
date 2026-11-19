@@ -554,61 +554,81 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   }
 }
 
-/* Light Arena ranking columns: keep the existing site header untouched */
+
+/* Qualification ranking polish v2: softer cards, cleaner rows, no spreadsheet-like outlines */
 #qualification .table{
-  background:rgba(255,255,255,.94);
-  border:1px solid #cbd1d9;
-  border-radius:11px;
-  box-shadow:0 3px 10px rgba(31,38,50,.10);
+  padding:5px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(177,186,198,.72);
+  border-radius:13px;
+  box-shadow:0 5px 16px rgba(38,45,58,.10);
+  gap:3px;
 }
 #qualification .thead{
-  background:linear-gradient(100deg,#420511,#5b1722);
-  color:#fff;
-  border-bottom:2px solid #d7dce3;
+  border-radius:8px;
+  background:linear-gradient(100deg,#420511 0%,#641321 100%);
+  border:0;
+  padding:7px 6px;
+  letter-spacing:.25px;
 }
 #qualification .r{
-  background:rgba(232,237,244,.52);
-  border-bottom:1px solid rgba(191,199,210,.65);
-  transition:background .2s ease;
+  flex:1 1 0;
+  min-height:0;
+  margin:1px 2px;
+  padding:1px 6px;
+  border:0;
+  border-radius:7px;
+  background:rgba(232,237,244,.55);
+  transition:none;
 }
-#qualification .r:nth-child(even){background:rgba(255,255,255,.86)}
+#qualification .r:nth-child(even){background:rgba(245,247,250,.92)}
 #qualification .r .rank{
-  border-radius:5px;
+  display:block;
+  border-radius:6px;
+  padding:3px 0;
+  background:linear-gradient(135deg,#e0e4ea,#f2f4f7);
   color:#420511;
-  font-weight:1000;
+  line-height:1.05;
 }
-#qualification .r .bib{color:#6b7280}
-#qualification .r .name{color:#242a33}
-#qualification .r .score{color:#420511}
+#qualification .r .bib{color:#788292;font-weight:800}
+#qualification .r .name{color:#252b35;font-weight:700;padding-left:4px}
+#qualification .r .score{color:#420511;font-size:clamp(10px,.8vw,13px);font-weight:1000}
+#qualification .r .tag{
+  justify-self:stretch;
+  border-radius:20px;
+  padding:3px 4px;
+  font-size:clamp(7px,.48vw,9px);
+  letter-spacing:.15px;
+}
 #qualification #menTables .r.qual{
-  background:linear-gradient(90deg,rgba(254,27,10,.13),rgba(255,255,255,.94));
-  outline:1.5px solid #fe1b0a;
-  outline-offset:-1.5px;
+  background:linear-gradient(100deg,rgba(254,27,10,.12),rgba(254,27,10,.045));
+  outline:0;
+  border-left:4px solid #fe1b0a;
+  padding-left:4px;
 }
 #qualification #menTables .r.qual .rank{
-  background:#fe1b0a;color:#fff;padding:3px 0;
+  background:#fe1b0a;
+  color:#fff;
 }
-#qualification #menTables .r.qual .tag{
-  background:#fe1b0a;color:#fff;
-}
+#qualification #menTables .r.qual .tag{background:#fe1b0a;color:#fff}
 #qualification #womenTable .r.qual{
-  background:linear-gradient(90deg,rgba(25,118,210,.15),rgba(255,255,255,.94));
-  outline:1.5px solid #1976d2;
-  outline-offset:-1.5px;
+  background:linear-gradient(100deg,rgba(25,118,210,.13),rgba(25,118,210,.045));
+  outline:0;
+  border-left:4px solid #1976d2;
+  padding-left:4px;
 }
 #qualification #womenTable .r.qual .rank{
-  background:#1976d2;color:#fff;padding:3px 0;
+  background:#1976d2;
+  color:#fff;
 }
-#qualification #womenTable .r.qual .tag{
-  background:#1976d2;color:#fff;
-}
-#qualification .r:not(.qual) .rank{
-  background:linear-gradient(135deg,#e5e8ed,#f7f8fa);
-  color:#420511;
-}
-@media(max-width:560px){
-  #qualification .thead{font-size:10px}
-  #qualification .r{padding-top:4px;padding-bottom:4px}
+#qualification #womenTable .r.qual .tag{background:#1976d2;color:#fff}
+#qualification .r:not(.qual) .tag{visibility:hidden}
+#qualification .legend{color:#596273}
+#qualification .swatch{border:0;background:linear-gradient(90deg,#fe1b0a,#ffb0a8)}
+#qualification .swatch.normal{background:linear-gradient(90deg,#dfe4eb,#f5f6f8);border:1px solid #cbd3df}
+@media(max-width:900px){
+  #qualification .table{padding:4px;gap:3px}
+  #qualification .r{margin:1px 2px;padding:4px 6px}
 }
 
 </style></head><body>
