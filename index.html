@@ -356,7 +356,7 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
     padding:6px 2px;
     line-height:1;
   }
-  /* 16 BESAR: one match in each of the eight evenly spaced slots */
+  /* ROUND OF 16: one match in each of the eight evenly spaced slots */
   #knockout .rounds>.round:nth-child(1) .match{align-self:center}
   #knockout .rounds>.round:nth-child(1) .match:nth-child(2){grid-row:2}
   #knockout .rounds>.round:nth-child(1) .match:nth-child(3){grid-row:3}
@@ -366,13 +366,13 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
   #knockout .rounds>.round:nth-child(1) .match:nth-child(7){grid-row:7}
   #knockout .rounds>.round:nth-child(1) .match:nth-child(8){grid-row:8}
   #knockout .rounds>.round:nth-child(1) .match:nth-child(9){grid-row:9}
-  /* 8 BESAR: centered between each pair of 16 besar matches */
+  /* QUARTERFINALS: centered between each pair of 16 besar matches */
   #knockout .rounds>.round:nth-child(2) .match{align-self:center}
   #knockout .rounds>.round:nth-child(2) .match:nth-child(2){grid-row:2 / span 2}
   #knockout .rounds>.round:nth-child(2) .match:nth-child(3){grid-row:4 / span 2}
   #knockout .rounds>.round:nth-child(2) .match:nth-child(4){grid-row:6 / span 2}
   #knockout .rounds>.round:nth-child(2) .match:nth-child(5){grid-row:8 / span 2}
-  /* 4 BESAR: centered between each pair of quarterfinals */
+  /* SEMIFINALS: centered between each pair of quarterfinals */
   #knockout .rounds>.round:nth-child(3) .match{align-self:center}
   #knockout .rounds>.round:nth-child(3) .match:nth-child(2){grid-row:2 / span 4}
   #knockout .rounds>.round:nth-child(3) .match:nth-child(3){grid-row:6 / span 4}
@@ -677,25 +677,25 @@ main{max-width:1900px;margin:auto;padding:10px clamp(12px,2vw,30px) 35px}.panel{
 </style></head><body>
 <header class="top"><div class="head"><div class="logo"><img src="https://raw.githubusercontent.com/ssekartadji5/Paragao-sport-community-cup-plant2026-archery/main/Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Paragon Sport Community Cup"></div><div class="rule"></div><div class="title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON ARCHERY PLANT</p></div><nav><button class="navbtn active" data-panel="qualification">QUALIFICATION</button><button class="navbtn" data-panel="knockout">KNOCKOUT &amp; FINAL</button></nav></div></header>
 <main>
-<section id="qualification" class="panel active"><div class="panel-title">ARCHERY QUALIFICATION RANKING</div><div class="category-grid"><div class="category"><div class="cat-title">KATEGORI PUTRA · 33 PESERTA</div><div class="tables" id="menTables"></div></div><div class="category"><div class="cat-title women-title">KATEGORI PUTRI · 19 PESERTA</div><div class="tables one" id="womenTable"></div></div></div><div class="legend"><span><i class="swatch"></i> TOP 16</span><span><i class="swatch normal"></i> Belum masuk TOP 16</span></div></section>
-<section id="knockout" class="panel"><div class="panel-title">ARCHERY · KNOCKOUT &amp; FINAL</div><div class="bracket-board"><div class="bracket-side men"><h2>KATEGORI PUTRA</h2><div class="rounds" id="menBracket"></div></div><div class="center-awards" id="centerAwards"></div><div class="bracket-side women"><h2>KATEGORI PUTRI</h2><div class="rounds" id="womenBracket"></div></div></div></section>
-<div class="demo">TAMPILAN PROTOTYPE · DATA CONTOH, BELUM TERHUBUNG KE GOOGLE SHEETS</div></main><footer class="footer">PARAGON SPORT COMMUNITY CUP PLANT · 2026</footer>
+<section id="qualification" class="panel active"><div class="panel-title">ARCHERY QUALIFICATION RANKING</div><div class="category-grid"><div class="category"><div class="cat-title">MEN'S CATEGORY · 33 ATHLETES</div><div class="tables" id="menTables"></div></div><div class="category"><div class="cat-title women-title">WOMEN'S CATEGORY · 19 ATHLETES</div><div class="tables one" id="womenTable"></div></div></div><div class="legend"><span><i class="swatch"></i> TOP 16</span><span><i class="swatch normal"></i> OUTSIDE TOP 16</span></div></section>
+<section id="knockout" class="panel"><div class="panel-title">ARCHERY · KNOCKOUT &amp; FINAL</div><div class="bracket-board"><div class="bracket-side men"><h2>KATEGORI MEN</h2><div class="rounds" id="menBracket"></div></div><div class="center-awards" id="centerAwards"></div><div class="bracket-side women"><h2>KATEGORI WOMEN</h2><div class="rounds" id="womenBracket"></div></div></div></section>
+<div class="demo">PROTOTYPE VIEW · SAMPLE DATA, NOT CONNECTED TO GOOGLE SHEETS</div></main><footer class="footer">PARAGON SPORT COMMUNITY CUP PLANT · 2026</footer>
 <script>
 const male=["Andi Pratama","Budi Santoso","Candra Wijaya","Dimas Saputra","Eko Firmansyah","Fajar Nugroho","Gilang Ramadhan","Hendra Kurniawan","Irfan Maulana","Joko Susilo","Kevin Prasetyo","Lukman Hakim","Muhammad Rizky","Nanda Putra","Oscar Wijaya","Putra Aditya","Raka Saputra","Satria Wibowo","Teguh Hidayat","Umar Farhan","Vino Akbar","Wahyu Setiawan","Yoga Pratama","Zaki Fadillah","Agus Setiawan","Bayu Kurnia","Dani Firmansyah","Evan Mahendra","Farhan Akmal","Gerry Saputra","Hadi Purnama","Ilham Maulana","Jefri Kurnia"];
 const female=["Anisa Rahmawati","Bella Oktavia","Citra Lestari","Dewi Anggraini","Eka Wulandari","Fitri Handayani","Gita Permata","Hana Safitri","Intan Maharani","Jihan Putri","Kartika Sari","Laila Nurfadila","Maya Puspita","Nadia Aulia","Olivia Putri","Putri Amelia","Qonita Zahra","Rani Aprilia","Salsa Nabila"];
 const makePlayers=(names,offset)=>names.map((name,i)=>({bib:i+1,name,total:Math.max(28,58-i+((i*7+offset)%5)-2),done:true})).sort((a,b)=>b.total-a.total||a.bib-b.bib);
 const men=makePlayers(male,2),women=makePlayers(female,4);
 function tableRows(players,startRank=0){return players.map((p,i)=>{const rank=startRank+i+1;const q=rank<=16;return '<div class="r '+(q?'qual':'')+'"><span class="rank">'+rank+'</span><span class="bib">'+p.bib+'</span><span class="name">'+p.name+'</span><span class="score">'+p.total+'</span><span class="tag">'+(q?'TOP 16':'')+'</span></div>'}).join('')}
-function tableBlock(players,startRank=0){return '<div class="table"><div class="thead"><span>Rank</span><span>BIB</span><span>Nama peserta</span><span>Total</span><span>Status</span></div>'+tableRows(players,startRank)+'</div>'}
+function tableBlock(players,startRank=0){return '<div class="table"><div class="thead"><span>Rank</span><span>BIB</span><span>Athlete</span><span>Total Points</span><span>Status</span></div>'+tableRows(players,startRank)+'</div>'}
 document.getElementById('menTables').innerHTML=tableBlock(men.slice(0,17),0)+tableBlock(men.slice(17),17);
 document.getElementById('womenTable').innerHTML=tableBlock(women);
 function comp(num,name,score,win=false){return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+num+'</span><span class="person">'+name+'</span><span class="points">'+score+'</span></div>'}
-function match(id,a,b,sa,sb,done=false){return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+(done?'SELESAI':'BELUM MULAI')+'</span></div>'+comp(a[0],a[1],sa,sa>sb)+comp(b[0],b[1],sb,sb>sa)+'</div>'}
-function bracket(players,prefix){const seeds=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];const r1=seeds.slice(0,8).map((s,i)=>match(prefix+'-R16-'+(i+1),[players[s].bib,players[s].name],[players[seeds[15-i]].bib,players[seeds[15-i]].name],55-i,51+i%3,false));const qf=[match(prefix+'-QF1',[players[0].bib,players[0].name],[players[7].bib,players[7].name],56,52,false),match(prefix+'-QF2',[players[4].bib,players[4].name],[players[3].bib,players[3].name],54,53,false),match(prefix+'-QF3',[players[5].bib,players[5].name],[players[2].bib,players[2].name],53,50,false),match(prefix+'-QF4',[players[6].bib,players[6].name],[players[1].bib,players[1].name],52,55,false)];const sf=[match(prefix+'-SF1',[players[0].bib,players[0].name],[players[4].bib,players[4].name],57,54,false),match(prefix+'-SF2',[players[5].bib,players[1].name],[players[6].bib,players[6].name],52,56,false)];return '<div class="round"><div class="round-label">16 BESAR</div>'+r1.join('')+'</div><div class="round"><div class="round-label">8 BESAR</div>'+qf.join('')+'</div><div class="round"><div class="round-label">4 BESAR</div>'+sf.join('')+'</div>'}
-function awardFinal(prefix){return '<div class="award"><div class="award-head">FINAL '+prefix+'</div>'+comp('—','Pemenang SF1','—')+comp('—','Pemenang SF2','—')+'<div class="award-note">JUARA 1 &amp; 2</div></div>'}
-function awardThird(prefix){return '<div class="award third"><div class="award-head">JUARA 3 '+prefix+'</div>'+comp('—','Kalah SF1','—')+comp('—','Kalah SF2','—')+'<div class="award-note">PEREBUTAN JUARA 3</div></div>'}
+function match(id,a,b,sa,sb,done=false){return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+(done?'COMPLETED':'NOT STARTED')+'</span></div>'+comp(a[0],a[1],sa,sa>sb)+comp(b[0],b[1],sb,sb>sa)+'</div>'}
+function bracket(players,prefix){const seeds=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];const r1=seeds.slice(0,8).map((s,i)=>match(prefix+'-R16-'+(i+1),[players[s].bib,players[s].name],[players[seeds[15-i]].bib,players[seeds[15-i]].name],55-i,51+i%3,false));const qf=[match(prefix+'-QF1',[players[0].bib,players[0].name],[players[7].bib,players[7].name],56,52,false),match(prefix+'-QF2',[players[4].bib,players[4].name],[players[3].bib,players[3].name],54,53,false),match(prefix+'-QF3',[players[5].bib,players[5].name],[players[2].bib,players[2].name],53,50,false),match(prefix+'-QF4',[players[6].bib,players[6].name],[players[1].bib,players[1].name],52,55,false)];const sf=[match(prefix+'-SF1',[players[0].bib,players[0].name],[players[4].bib,players[4].name],57,54,false),match(prefix+'-SF2',[players[5].bib,players[1].name],[players[6].bib,players[6].name],52,56,false)];return '<div class="round"><div class="round-label">ROUND OF 16</div>'+r1.join('')+'</div><div class="round"><div class="round-label">QUARTERFINALS</div>'+qf.join('')+'</div><div class="round"><div class="round-label">SEMIFINALS</div>'+sf.join('')+'</div>'}
+function awardFinal(prefix){return '<div class="award"><div class="award-head">FINAL '+prefix+'</div>'+comp('—','SF1 WINNER','—')+comp('—','SF2 WINNER','—')+'<div class="award-note">1ST &amp; 2ND PLACE</div></div>'}
+function awardThird(prefix){return '<div class="award third"><div class="award-head">THIRD PLACE '+prefix+'</div>'+comp('—','SF1 LOSER','—')+comp('—','SF2 LOSER','—')+'<div class="award-note">THIRD-PLACE MATCH</div></div>'}
 document.getElementById('menBracket').innerHTML=bracket(men,'M');
 document.getElementById('womenBracket').innerHTML=bracket(women,'W');
-document.getElementById('centerAwards').innerHTML=awardFinal('PUTRA')+awardFinal('PUTRI')+awardThird('PUTRA')+awardThird('PUTRI');
+document.getElementById('centerAwards').innerHTML=awardFinal('MEN')+awardFinal('WOMEN')+awardThird('MEN')+awardThird('WOMEN');
 document.querySelectorAll('.navbtn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.panel));}));
 </script></body></html>
