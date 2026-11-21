@@ -1050,6 +1050,13 @@ function sortQualification(rows) {
     return (a.bib ?? 0)-(b.bib ?? 0);
   });
 }
+let archeryBibByName = {};
+
+function bibFor(name) {
+  if (!name) return "—";
+  return archeryBibByName[String(name).trim().toLowerCase()] ?? "—";
+}
+
 function comp(num,name,score,win=false) {
   return '<div class="competitor '+(win?'winner':'')+'"><span class="num">'+displayValue(num)+'</span><span class="person" title="'+escapeHtml(name)+'">'+(name ? escapeHtml(name) : 'TBD')+'</span><span class="points">'+displayValue(score)+'</span></div>';
 }
@@ -1059,8 +1066,12 @@ function matchCard(item, category, index, seededPair=null) {
   const done = item.status === "COMPLETED";
   const athleteA = item.athleteA || (seededPair && seededPair[0] ? seededPair[0].name : "");
   const athleteB = item.athleteB || (seededPair && seededPair[1] ? seededPair[1].name : "");
-  const bibA = seededPair && !item.athleteA && seededPair[0] ? seededPair[0].bib : "A";
-  const bibB = seededPair && !item.athleteB && seededPair[1] ? seededPair[1].bib : "B";
+  const bibA = bibFor(athleteA) !== "—"
+    ? bibFor(athleteA)
+    : (seededPair && !item.athleteA && seededPair[0] ? seededPair[0].bib : "—");
+  const bibB = bibFor(athleteB) !== "—"
+    ? bibFor(athleteB)
+    : (seededPair && !item.athleteB && seededPair[1] ? seededPair[1].bib : "—");
   return '<div class="match"><div class="match-meta"><span class="match-id">'+id+'</span><span class="'+(done?'done':'')+'">'+escapeHtml(item.status || "NOT STARTED")+'</span></div>' +
     comp(bibA,athleteA,item.scoreA,!!item.winner && item.winner===athleteA) +
     comp(bibB,athleteB,item.scoreB,!!item.winner && item.winner===athleteB) +
@@ -1104,8 +1115,8 @@ function awardMatch(title, item, note, className="") {
   const aWin = !!item.winner && item.winner === item.athleteA;
   const bWin = !!item.winner && item.winner === item.athleteB;
   return '<div class="award '+className+'"><div class="award-head">'+title+'</div>' +
-    comp("—",item.athleteA,item.scoreA,aWin) +
-    comp("—",item.athleteB,item.scoreB,bWin) +
+    comp(bibFor(item.athleteA),item.athleteA,item.scoreA,aWin) +
+    comp(bibFor(item.athleteB),item.athleteB,item.scoreB,bWin) +
     '<div class="award-note">'+note+'</div></div>';
 }
 function awardChampion(category, finalMatch) {
@@ -1123,6 +1134,13 @@ function renderAwards(menRows,womenRows) {
     awardMatch("THIRD PLACE WOMEN",wt,"THIRD-PLACE MATCH","third women");
 }
 function renderArchery(data) {
+  archeryBibByName = {};
+  (data.participants || []).forEach(p => {
+    if (p.name && p.bib !== null && p.bib !== undefined) {
+      archeryBibByName[String(p.name).trim().toLowerCase()] = p.bib;
+    }
+  });
+
   const men = sortQualification(data.qualification.men);
   const women = sortQualification(data.qualification.women);
   document.getElementById("menTables").innerHTML =
